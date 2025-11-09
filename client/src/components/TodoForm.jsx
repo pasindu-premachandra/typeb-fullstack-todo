@@ -1,9 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function TodoForm({ onSubmit, initialData = null, onCancel }) {
   const [title, setTitle] = useState(initialData?.title || '');
   const [description, setDescription] = useState(initialData?.description || '');
   const [error, setError] = useState('');
+
+  // Update form fields when initialData changes (when editing a todo)
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || '');
+      setDescription(initialData.description || '');
+    } else {
+      setTitle('');
+      setDescription('');
+    }
+  }, [initialData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
