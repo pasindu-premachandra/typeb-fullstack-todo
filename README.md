@@ -1,153 +1,136 @@
-# 📝 Full Stack Take-home Assignment – TODO App
+# 📝 TODO App - Full Stack Application
 
-## 🧠 Objective
+A simple and clean TODO management application built with React, Express, and MongoDB.
 
-This exercise is intended to evaluate your understanding of full-stack development using your preferred stack.
+## 🎥 Demo
 
-You’ll build a simple **TODO app** with basic task management functionality, covering both frontend and backend.
-
----
-
-## 📦 Tech Stack Requirements
-
-- **Frontend:** React.js
-- **Backend:** Node.js with Express.js is preferred. But you may choose your preferred backend technology.
-- **Database:** MongoDB or any other Database technologies
-
-You are free to use any UI libraries or tools that improve your productivity.
-
----
+ ![Demo Video](https://github.com/user-attachments/assets/179cbbf7-f4ef-471e-8d07-30af0eb360f8)
 
 ## ✨ Features
 
-The app should allow users to:
+- ✅ View all todos with clean UI
+- ➕ Create new todo with title and optional description
+- ✏️ Edit existing todos
+- ✅ Mark todos as done/undone with visual feedback (strikethrough)
+- ❌ Delete todos with confirmation
+- 📱 Responsive design for mobile and desktop
+- ⚡ Real-time updates
+- 🎨 Clean and modern interface
 
-- ✅ **View TODOs**: Display a list of all TODO items.
-- ➕ **Create a TODO**: Add a new TODO with a title and optional description.
-- ✏️ **Edit a TODO**: Update the title and/or description.
-- ✅ **Mark as Done**: Toggle a TODO's `done` status.
-- ❌ **Delete a TODO**: Remove a TODO item from the list.
+## 🛠️ Tech Stack
 
----
+**Frontend:**
+- React.js (with Vite)
+- Axios for API calls
+- CSS3 for styling
 
-## 🗂️ Recommended Folder Structure
+**Backend:**
+- Node.js & Express.js
+- MongoDB with Mongoose ODM
+- CORS enabled
 
-You're free to organize your code as you see fit, but here's a suggested structure:
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js (v18 or higher)
+- MongoDB (Atlas or local instance)
+
+### Backend Setup
+
+```bash
+cd server
+npm install
+
+# Create .env file
+echo "MONGODB_URI=your_mongodb_connection_string" > .env
+echo "PORT=5000" >> .env
+
+# Start server
+npm run dev
+```
+
+Server runs on `http://localhost:5000`
+
+### Frontend Setup
+
+```bash
+cd client
+npm install
+
+# Start development server
+npm run dev
+```
+
+Frontend runs on `http://localhost:3000`
+
+## 📁 Project Structure
 
 ```
-hiring-fullstack-todo/
-├── client/          # React frontend
-│   ├── README.md
-│   └── ...
-├── server/          # Express backend
-│   ├── README.md
-│   └── ...
-├── README.md
+typeb-fullstack-todo/
+├── client/              # React frontend
+│   ├── src/
+│   │   ├── components/  # Reusable components
+│   │   ├── pages/       # Page components
+│   │   ├── services/    # API service layer
+│   │   └── App.jsx
+│   └── package.json
+│
+├── server/              # Express backend
+│   ├── config/          # Database configuration
+│   ├── controllers/     # Business logic
+│   ├── models/          # Mongoose schemas
+│   ├── routes/          # API routes
+│   └── server.js
+│
+└── README.md
 ```
 
----
+## 🔌 API Endpoints
 
-## 🛠️ API Requirements
+| Method | Endpoint                | Description                  |
+|--------|-------------------------|------------------------------|
+| GET    | `/api/todos`            | Get all todos                |
+| POST   | `/api/todos`            | Create new todo              |
+| PUT    | `/api/todos/:id`        | Update todo                  |
+| PATCH  | `/api/todos/:id/done`   | Toggle done status           |
+| DELETE | `/api/todos/:id`        | Delete todo                  |
 
-Your Express backend should expose the following RESTful API endpoints:
+## 💾 Database Schema
 
-| Method | Endpoint                | Description                      |
-|--------|-------------------------|----------------------------------|
-| GET    | `/api/todos`            | Get all TODO items               |
-| POST   | `/api/todos`            | Create a new TODO item           |
-| PUT    | `/api/todos/:id`        | Update a TODO (title/description)|
-| PATCH  | `/api/todos/:id/done`   | Toggle the `done` status         |
-| DELETE | `/api/todos/:id`        | Delete a TODO                    |
-
-### Database Model Example
-
-```json
+```javascript
 {
-  "_id": "string",
-  "title": "string",
-  "description": "string (optional)",
-  "done": "boolean",
-  "createdAt": "Timestamp",
-  "updatedAt": "Timestamp"
+  _id: ObjectId,
+  title: String (required),
+  description: String (optional),
+  done: Boolean (default: false),
+  createdAt: Timestamp,
+  updatedAt: Timestamp
 }
 ```
 
-You are encouraged to use **Mongoose** for schema modeling.
+## 🎯 Key Features Implemented
 
----
+- **Form Validation**: Title is required before submission
+- **Error Handling**: User-friendly error messages
+- **Loading States**: Visual feedback during data fetching
+- **Delete Confirmation**: Prevents accidental deletions
+- **Responsive Design**: Works on all screen sizes
+- **Clean Architecture**: Organized component structure
 
-## 🖼️ Frontend Expectations
+## 📝 Notes
 
-- Display all TODOs in a clean and simple UI
-- Provide a form to add new TODOs
-- Allow editing a TODO (title/description)
-- Provide a way to mark as done/undone (e.g., checkbox, button)
-- Add a delete button
-- Clearly show completed tasks (e.g., strikethrough or faded style)
+- The application uses a simple monorepo structure
+- MongoDB connection string should be added to `server/.env`
+- Both servers must be running for the app to work
+- Default ports: Backend (5000), Frontend (3000)
 
----
+## 🔧 Development
 
-## ⚙️ Functional Expectations
+**Build for production:**
+```bash
+# Frontend
+cd client && npm run build
 
-- The frontend should talk to the backend via HTTP API
-- The backend should persist TODOs in MongoDB
-- Handle loading and error states gracefully
-
-**Bonus Points For:**
-- Form validation
-- User-friendly error messages
-- Optimistic UI updates
-- Nice touches in UX (e.g., animations, transitions)
-- Monorepo setup using an appropriate technology
-
----
-
-## 🧾 Submission Instructions
-
-Please follow these steps for submission:
-
-1. **Fork** this repository to your own GitHub account.
-2. Create a new branch named `develop` in your fork.
-3. Complete the assignment on the `develop` branch.
-4. Create a **Pull Request to your own fork** (`develop` → `main`).
-5. Fill out the provided **PR template**, including:
-   - Summary of what you built
-   - Solution rationale & user value
-   - A short demo video
-6. Fill [this form](https://coda.io/form/Type-B-Digital-Take-Home-assessment-submission_dU8ZJTHWnjv) to officially submit your work.
-
-> ⚠️ Submissions may not be considered if instructions are not followed properly
-
----
-
-## ⏳ Time Expectation
-
-This task is expected to take **6–8 hours**. Please don’t worry about making it perfect — we’re primarily looking at how you approach full-stack development and structure your solution.
-
----
-
-## ✅ Evaluation Criteria
-
-- Proper use of chosen stack
-- RESTful API structure and usage
-- Code readability and organization
-- Functional completeness of required features
-- Basic UX considerations
-- Ability to follow instructions and communicate clearly
-
----
-
-## 📥 README & PR Template Required
-
-Your submission must include:
-
-- `README.md` file for the frontend with instructions on how to set up and run the frontend app
-- `README.md` file for the backend with:
-  - How to set up and run the backend
-  - MongoDB connection notes (e.g., Atlas or local)
-  - Any assumptions or limitations
-- A completed PR template in your pull request
-
----
-
-Thank you for taking the time to complete this assignment! We’re looking forward to seeing what you build.
+# Backend
+cd server && npm start
+```
